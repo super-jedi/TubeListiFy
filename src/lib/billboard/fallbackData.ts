@@ -1,0 +1,112 @@
+import { BillboardChartItem } from '../../types';
+
+export const HISTORICAL_FALLBACKS: Record<string, BillboardChartItem[]> = {
+  // 1958-08-04 - The First Billboard Hot 100 Chart
+  '1958-08-04': [
+    { rank: 1, title: 'Poor Little Fool', artist: 'Ricky Nelson', lastWeekRank: null, peakRank: 1, weeksOnChart: 1 },
+    { rank: 2, title: 'Patricia', artist: 'Perez Prado And His Orchestra', lastWeekRank: null, peakRank: 2, weeksOnChart: 1 },
+    { rank: 3, title: 'Splish Splash', artist: 'Bobby Darin', lastWeekRank: null, peakRank: 3, weeksOnChart: 1 },
+    { rank: 4, title: 'Hard Headed Woman', artist: 'Elvis Presley', lastWeekRank: null, peakRank: 4, weeksOnChart: 1 },
+    { rank: 5, title: 'When', artist: 'Kalin Twins', lastWeekRank: null, peakRank: 5, weeksOnChart: 1 },
+    { rank: 6, title: 'Rebel-’Rouser', artist: 'Duane Eddy', lastWeekRank: null, peakRank: 6, weeksOnChart: 1 },
+    { rank: 7, title: 'Yakety Yak', artist: 'The Coasters', lastWeekRank: null, peakRank: 7, weeksOnChart: 1 },
+    { rank: 8, title: 'My True Love', artist: 'Jack Scott', lastWeekRank: null, peakRank: 8, weeksOnChart: 1 },
+    { rank: 9, title: 'Willie And The Hand Jive', artist: 'The Johnny Otis Show', lastWeekRank: null, peakRank: 9, weeksOnChart: 1 },
+    { rank: 10, title: 'Fever', artist: 'Peggy Lee', lastWeekRank: null, peakRank: 10, weeksOnChart: 1 },
+    { rank: 11, title: 'For Your Precious Love', artist: 'Jerry Butler & The Impressions', lastWeekRank: null, peakRank: 11, weeksOnChart: 1 },
+    { rank: 12, title: 'One Summer Night', artist: 'The Danleers', lastWeekRank: null, peakRank: 12, weeksOnChart: 1 },
+    { rank: 13, title: 'Born Too Late', artist: 'The Poni-Tails', lastWeekRank: null, peakRank: 13, weeksOnChart: 1 },
+    { rank: 14, title: 'Just A Dream', artist: 'Jimmy Clanton', lastWeekRank: null, peakRank: 14, weeksOnChart: 1 },
+    { rank: 15, title: 'Left Right Out Of Your Heart', artist: 'Patti Page', lastWeekRank: null, peakRank: 15, weeksOnChart: 1 },
+  ],
+
+  // 1964-04-04 - The Beatles occupy all top 5 spots
+  '1964-04-04': [
+    { rank: 1, title: "Can't Buy Me Love", artist: 'The Beatles', lastWeekRank: 27, peakRank: 1, weeksOnChart: 3 },
+    { rank: 2, title: 'Twist And Shout', artist: 'The Beatles', lastWeekRank: 2, peakRank: 2, weeksOnChart: 5 },
+    { rank: 3, title: 'She Loves You', artist: 'The Beatles', lastWeekRank: 1, peakRank: 1, weeksOnChart: 11 },
+    { rank: 4, title: 'I Want To Hold Your Hand', artist: 'The Beatles', lastWeekRank: 3, peakRank: 1, weeksOnChart: 12 },
+    { rank: 5, title: 'Please Please Me', artist: 'The Beatles', lastWeekRank: 4, peakRank: 3, weeksOnChart: 8 },
+    { rank: 6, title: 'Suspicion', artist: 'Terry Stafford', lastWeekRank: 7, peakRank: 6, weeksOnChart: 7 },
+    { rank: 7, title: 'Hello, Dolly!', artist: 'Louis Armstrong', lastWeekRank: 11, peakRank: 7, weeksOnChart: 7 },
+    { rank: 8, title: 'The Shoop Shoop Song (It’s In His Kiss)', artist: 'Betty Everett', lastWeekRank: 10, peakRank: 8, weeksOnChart: 6 },
+    { rank: 9, title: 'My Heart Belongs To Only You', artist: 'Bobby Vinton', lastWeekRank: 9, peakRank: 9, weeksOnChart: 7 },
+    { rank: 10, title: 'Glad All Over', artist: 'The Dave Clark Five', lastWeekRank: 6, peakRank: 6, weeksOnChart: 8 },
+  ],
+
+  // 1985-07-13 - Live Aid Weekend
+  '1985-07-13': [
+    { rank: 1, title: 'A View To A Kill', artist: 'Duran Duran', lastWeekRank: 2, peakRank: 1, weeksOnChart: 9 },
+    { rank: 2, title: 'Sussudio', artist: 'Phil Collins', lastWeekRank: 1, peakRank: 1, weeksOnChart: 10 },
+    { rank: 3, title: 'Raspberry Beret', artist: 'Prince And The Revolution', lastWeekRank: 4, peakRank: 2, weeksOnChart: 8 },
+    { rank: 4, title: 'Everytime You Go Away', artist: 'Paul Young', lastWeekRank: 5, peakRank: 1, weeksOnChart: 9 },
+    { rank: 5, title: 'The Search Is Over', artist: 'Survivor', lastWeekRank: 7, peakRank: 4, weeksOnChart: 13 },
+    { rank: 6, title: 'Heaven', artist: 'Bryan Adams', lastWeekRank: 3, peakRank: 1, weeksOnChart: 13 },
+    { rank: 7, title: 'You Give Good Love', artist: 'Whitney Houston', lastWeekRank: 8, peakRank: 3, weeksOnChart: 10 },
+    { rank: 8, title: 'Shout', artist: 'Tears For Fears', lastWeekRank: 10, peakRank: 1, weeksOnChart: 6 },
+    { rank: 9, title: 'Glory Days', artist: 'Bruce Springsteen', lastWeekRank: 12, peakRank: 5, weeksOnChart: 6 },
+    { rank: 10, title: 'Voices Carry', artist: "'Til Tuesday", lastWeekRank: 9, peakRank: 8, weeksOnChart: 15 },
+    { rank: 11, title: 'Would I Lie To You?', artist: 'Eurythmics', lastWeekRank: 6, peakRank: 5, weeksOnChart: 13 },
+    { rank: 12, title: 'If You Love Somebody Set Them Free', artist: 'Sting', lastWeekRank: 13, peakRank: 3, weeksOnChart: 6 },
+    { rank: 13, title: 'Never Surrender', artist: 'Corey Hart', lastWeekRank: 15, peakRank: 3, weeksOnChart: 6 },
+    { rank: 14, title: '19', artist: 'Paul Hardcastle', lastWeekRank: 17, peakRank: 14, weeksOnChart: 7 },
+    { rank: 15, title: 'We Are The World', artist: 'USA For Africa', lastWeekRank: 24, peakRank: 1, weeksOnChart: 16 },
+  ],
+
+  // 1999-12-25 - Y2K Pop Explosion
+  '1999-12-25': [
+    { rank: 1, title: 'Smooth', artist: 'Santana Featuring Rob Thomas', lastWeekRank: 1, peakRank: 1, weeksOnChart: 23 },
+    { rank: 2, title: 'Back At One', artist: 'Brian McKnight', lastWeekRank: 2, peakRank: 2, weeksOnChart: 17 },
+    { rank: 3, title: 'I Wanna Love You Forever', artist: 'Jessica Simpson', lastWeekRank: 3, peakRank: 3, weeksOnChart: 11 },
+    { rank: 4, title: 'My Love Is Your Love', artist: 'Whitney Houston', lastWeekRank: 4, peakRank: 4, weeksOnChart: 17 },
+    { rank: 5, title: 'Hot Boyz', artist: 'Missy Elliott Featuring Nas, EVE & Q-Tip', lastWeekRank: 5, peakRank: 5, weeksOnChart: 6 },
+    { rank: 6, title: 'Waiting For Tonight', artist: 'Jennifer Lopez', lastWeekRank: 8, peakRank: 8, weeksOnChart: 13 },
+    { rank: 7, title: 'Girl On TV', artist: 'LFO', lastWeekRank: 10, peakRank: 7, weeksOnChart: 7 },
+    { rank: 8, title: 'What A Girl Wants', artist: 'Christina Aguilera', lastWeekRank: 11, peakRank: 1, weeksOnChart: 4 },
+    { rank: 9, title: 'Bring It All To Me', artist: 'Blaque', lastWeekRank: 13, peakRank: 5, weeksOnChart: 10 },
+    { rank: 10, title: 'Breathe', artist: 'Faith Hill', lastWeekRank: 14, peakRank: 2, weeksOnChart: 8 },
+    { rank: 11, title: 'Larger Than Life', artist: 'Backstreet Boys', lastWeekRank: 25, peakRank: 25, weeksOnChart: 11 },
+    { rank: 12, title: '...Baby One More Time', artist: 'Britney Spears', lastWeekRank: 18, peakRank: 1, weeksOnChart: 32 },
+    { rank: 13, title: 'No Scrubs', artist: 'TLC', lastWeekRank: 20, peakRank: 1, weeksOnChart: 28 },
+    { rank: 14, title: 'Genie In A Bottle', artist: 'Christina Aguilera', lastWeekRank: 22, peakRank: 1, weeksOnChart: 25 },
+    { rank: 15, title: 'All Star', artist: 'Smash Mouth', lastWeekRank: 30, peakRank: 4, weeksOnChart: 30 },
+  ],
+
+  // 2016-08-06 - Streaming Era Boom
+  '2016-08-06': [
+    { rank: 1, title: 'Cheap Thrills', artist: 'Sia Featuring Sean Paul', lastWeekRank: 3, peakRank: 1, weeksOnChart: 23 },
+    { rank: 2, title: 'One Dance', artist: 'Drake Featuring WizKid & Kyla', lastWeekRank: 1, peakRank: 1, weeksOnChart: 16 },
+    { rank: 3, title: 'This Is What You Came For', artist: 'Calvin Harris Featuring Rihanna', lastWeekRank: 4, peakRank: 3, weeksOnChart: 12 },
+    { rank: 4, title: "Can't Stop The Feeling!", artist: 'Justin Timberlake', lastWeekRank: 2, peakRank: 1, weeksOnChart: 11 },
+    { rank: 5, title: "Don't Let Me Down", artist: 'The Chainsmokers Featuring Daya', lastWeekRank: 5, peakRank: 3, weeksOnChart: 23 },
+    { rank: 6, title: 'Ride', artist: 'twenty one pilots', lastWeekRank: 6, peakRank: 6, weeksOnChart: 19 },
+    { rank: 7, title: 'Needed Me', artist: 'Rihanna', lastWeekRank: 7, peakRank: 7, weeksOnChart: 24 },
+    { rank: 8, title: 'Panda', artist: 'Desiigner', lastWeekRank: 8, peakRank: 1, weeksOnChart: 22 },
+    { rank: 9, title: 'Send My Love (To Your New Lover)', artist: 'Adele', lastWeekRank: 9, peakRank: 9, weeksOnChart: 10 },
+    { rank: 10, title: 'Work From Home', artist: 'Fifth Harmony Featuring Ty Dolla $ign', lastWeekRank: 11, peakRank: 4, weeksOnChart: 21 },
+    { rank: 11, title: 'Closer', artist: 'The Chainsmokers Featuring Halsey', lastWeekRank: null, peakRank: 1, weeksOnChart: 1 },
+    { rank: 12, title: 'Stressed Out', artist: 'twenty one pilots', lastWeekRank: 14, peakRank: 2, weeksOnChart: 32 },
+    { rank: 13, title: 'Cold Water', artist: 'Major Lazer Featuring Justin Bieber & MO', lastWeekRank: null, peakRank: 2, weeksOnChart: 1 },
+    { rank: 14, title: 'Work', artist: 'Rihanna Featuring Drake', lastWeekRank: 16, peakRank: 1, weeksOnChart: 26 },
+    { rank: 15, title: 'Love Yourself', artist: 'Justin Bieber', lastWeekRank: 19, peakRank: 1, weeksOnChart: 36 },
+  ],
+
+  // 2024-01-13 - Modern Charts
+  '2024-01-13': [
+    { rank: 1, title: 'Lovin On Me', artist: 'Jack Harlow', lastWeekRank: 1, peakRank: 1, weeksOnChart: 8 },
+    { rank: 2, title: 'Cruel Summer', artist: 'Taylor Swift', lastWeekRank: 2, peakRank: 1, weeksOnChart: 35 },
+    { rank: 3, title: 'Greedy', artist: 'Tate McRae', lastWeekRank: 3, peakRank: 3, weeksOnChart: 16 },
+    { rank: 4, title: 'Paint The Town Red', artist: 'Doja Cat', lastWeekRank: 4, peakRank: 1, weeksOnChart: 22 },
+    { rank: 5, title: 'I Remember Everything', artist: 'Zach Bryan Featuring Kacey Musgraves', lastWeekRank: 6, peakRank: 1, weeksOnChart: 19 },
+    { rank: 6, title: 'Agora Hills', artist: 'Doja Cat', lastWeekRank: 7, peakRank: 6, weeksOnChart: 15 },
+    { rank: 7, title: 'Snooze', artist: 'SZA', lastWeekRank: 5, peakRank: 2, weeksOnChart: 56 },
+    { rank: 8, title: 'Water', artist: 'Tyla', lastWeekRank: 10, peakRank: 7, weeksOnChart: 14 },
+    { rank: 9, title: 'Fast Car', artist: 'Luke Combs', lastWeekRank: 9, peakRank: 2, weeksOnChart: 41 },
+    { rank: 10, title: 'Last Night', artist: 'Morgan Wallen', lastWeekRank: 8, peakRank: 1, weeksOnChart: 49 },
+    { rank: 11, title: 'Vampire', artist: 'Olivia Rodrigo', lastWeekRank: 12, peakRank: 1, weeksOnChart: 27 },
+    { rank: 12, title: 'Rich Baby Daddy', artist: 'Drake Featuring Sexyy Red & SZA', lastWeekRank: 11, peakRank: 11, weeksOnChart: 13 },
+    { rank: 13, title: 'White Horse', artist: 'Chris Stapleton', lastWeekRank: 14, peakRank: 12, weeksOnChart: 24 },
+    { rank: 14, title: 'Fukumean', artist: 'Gunna', lastWeekRank: 13, peakRank: 4, weeksOnChart: 29 },
+    { rank: 15, title: 'What Was I Made For?', artist: 'Billie Eilish', lastWeekRank: 15, peakRank: 14, weeksOnChart: 25 },
+  ],
+};

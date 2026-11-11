@@ -1,0 +1,81 @@
+import { BillboardHistoricalDate } from '../../types';
+
+export const HISTORICAL_MILESTONES: BillboardHistoricalDate[] = [
+  {
+    date: '1958-08-04',
+    title: 'The Dawn of Hot 100',
+    subtitle: 'The very first official Billboard Hot 100 chart in music history',
+    era: '1950s Golden Era',
+    featuredArtist: 'Ricky Nelson, Elvis Presley',
+  },
+  {
+    date: '1964-04-04',
+    title: 'Beatlemania Sweeps America',
+    subtitle: 'The Beatles hold all top 5 positions simultaneously on the Hot 100',
+    era: '1960s British Invasion',
+    featuredArtist: 'The Beatles',
+  },
+  {
+    date: '1969-08-16',
+    title: 'Woodstock Weekend',
+    subtitle: 'Psychedelic rock and soul during the legendary Woodstock music festival',
+    era: '1960s Counterculture',
+    featuredArtist: 'The Rolling Stones, Sly & Family Stone',
+  },
+  {
+    date: '1977-12-24',
+    title: 'Saturday Night Fever & Disco Peak',
+    subtitle: 'The Bee Gees dominate global charts with timeless dance grooves',
+    era: '1970s Disco Era',
+    featuredArtist: 'Bee Gees, Donna Summer',
+  },
+  {
+    date: '1983-03-05',
+    title: 'Michael Jackson Thriller Era',
+    subtitle: 'Billie Jean reigns at #1 as MTV transforms music video culture',
+    era: '1980s Pop Genesis',
+    featuredArtist: 'Michael Jackson, Prince',
+  },
+  {
+    date: '1985-07-13',
+    title: 'Live Aid & We Are The World',
+    subtitle: 'The global charity concert that united 1.9 billion listeners worldwide',
+    era: '1980s Arena Rock & Charity',
+    featuredArtist: 'USA for Africa, Duran Duran, Phil Collins',
+  },
+  {
+    date: '1992-01-11',
+    title: 'Nevermind Knocks Off King of Pop',
+    subtitle: 'Nirvana reaches #1, cementing the 90s grunge and alternative explosion',
+    era: '1990s Grunge & Alternative',
+    featuredArtist: 'Nirvana, Boyz II Men',
+  },
+  {
+    date: '1999-12-25',
+    title: 'Y2K Millennial Pop Explosion',
+    subtitle: 'Boybands, teen pop, and Latin wave welcoming the new millennium',
+    era: '1990s/2000s Y2K Pop',
+    featuredArtist: 'Santana, Britney Spears, Backstreet Boys',
+  },
+  {
+    date: '2008-08-23',
+    title: '2000s Pop & Hip-Hop Golden Era',
+    subtitle: 'Rihanna, Katy Perry, and Coldplay define summer anthems',
+    era: '2000s Digital Era',
+    featuredArtist: 'Rihanna, Katy Perry, Chris Brown',
+  },
+  {
+    date: '2016-08-06',
+    title: 'Streaming & Synthwave Wave',
+    subtitle: 'Drake and Sia dominate the modern digital streaming revolution',
+    era: '2010s Streaming Era',
+    featuredArtist: 'Drake, Sia, The Chainsmokers',
+  },
+  {
+    date: '2024-01-13',
+    title: 'Modern Hits & Global Beats',
+    subtitle: 'Billboard Hot 100 top global streaming and viral chart-toppers',
+    era: '2020s Modern Charts',
+    featuredArtist: 'Jack Harlow, Taylor Swift, SZA',
+  },
+];
