@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    let result: { id: string; url: string };
+    let result: { id: string; url: string; isDemo?: boolean };
 
     if (targetPlatform === 'spotify') {
       const trackUris = selectedItems.map((item: MatchResult) => {
@@ -59,6 +59,7 @@ export async function POST(req: NextRequest) {
       success: true,
       playlistId: result.id,
       playlistUrl: result.url,
+      isDemo: Boolean(result.isDemo),
       transferredCount: selectedItems.length,
       targetPlatform,
     });

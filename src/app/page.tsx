@@ -18,6 +18,30 @@ export default function Home() {
   const [transferredTracks, setTransferredTracks] = useState<Track[] | undefined>(undefined);
   const [transferredTitle, setTransferredTitle] = useState<string | undefined>(undefined);
 
+  // Handle OAuth Callback params on client mount
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const spotifyToken = urlParams.get('spotify_token');
+      const spotifyUser = urlParams.get('spotify_user');
+      const authError = urlParams.get('auth_error');
+
+      if (spotifyToken) {
+        localStorage.setItem('tubelistify_spotify_token', spotifyToken);
+        if (spotifyUser) {
+          localStorage.setItem('tubelistify_spotify_user', spotifyUser);
+        }
+        setIsDemoMode(false);
+        alert(`Successfully connected to Spotify as ${spotifyUser || 'User'}! Live playlist creation is now active.`);
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      } else if (authError) {
+        alert(`Spotify Authentication: ${authError}`);
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    }
+  }, []);
+
   const handleTransferBillboardChart = (
     tracks: Track[],
     title: string,
@@ -51,6 +75,7 @@ export default function Home() {
             isDemoMode={isDemoMode}
             initialTracks={transferredTracks}
             initialTitle={transferredTitle}
+            onNavigateToSettings={() => setActiveTab('settings')}
           />
         )}
 

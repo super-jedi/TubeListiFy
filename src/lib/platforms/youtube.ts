@@ -284,12 +284,12 @@ export async function createYouTubePlaylist(
   description: string,
   videoIds: string[],
   accessToken?: string
-): Promise<{ id: string; url: string }> {
+): Promise<{ id: string; url: string; isDemo?: boolean }> {
   if (!accessToken) {
-    const mockId = `PL_mock_${Math.random().toString(36).substring(2, 9)}`;
     return {
-      id: mockId,
-      url: `https://www.youtube.com/playlist?list=${mockId}`,
+      id: 'demo_youtube_playlist',
+      url: 'https://www.youtube.com/playlist?list=PLrAl5KGt2D4x-o3I-2X8bL2-Y6-0y7P8m',
+      isDemo: true,
     };
   }
 

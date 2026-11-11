@@ -288,13 +288,13 @@ export async function createSpotifyPlaylist(
   trackUris: string[],
   accessToken?: string,
   userId?: string
-): Promise<{ id: string; url: string }> {
+): Promise<{ id: string; url: string; isDemo?: boolean }> {
   if (!accessToken) {
     // Simulated successful creation
-    const mockId = `tubelistify_${Math.random().toString(36).substring(2, 9)}`;
     return {
-      id: mockId,
-      url: `https://open.spotify.com/playlist/${mockId}`,
+      id: 'demo_spotify_playlist',
+      url: 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M', // Verified live official playlist
+      isDemo: true,
     };
   }
 

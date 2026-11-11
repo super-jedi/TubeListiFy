@@ -24,12 +24,14 @@ interface TransferViewProps {
   onSelectMilestoneChart?: (tracks: Track[], title: string) => void;
   initialTracks?: Track[];
   initialTitle?: string;
+  onNavigateToSettings?: () => void;
 }
 
 export const TransferView: React.FC<TransferViewProps> = ({
   isDemoMode,
   initialTracks,
   initialTitle,
+  onNavigateToSettings,
 }) => {
   const [sourcePlatform, setSourcePlatform] = useState<Platform>('youtube');
   const [targetPlatform, setTargetPlatform] = useState<Platform>('spotify');
@@ -54,7 +56,7 @@ export const TransferView: React.FC<TransferViewProps> = ({
   const [targetTitle, setTargetTitle] = useState('');
   const [targetDescription, setTargetDescription] = useState('');
   const [isTransferring, setIsTransferring] = useState(false);
-  const [completedPlaylist, setCompletedPlaylist] = useState<{ id: string; url: string; count: number } | null>(null);
+  const [completedPlaylist, setCompletedPlaylist] = useState<{ id: string; url: string; count: number; isDemo?: boolean } | null>(null);
 
   // Handle external initialization (e.g. from Billboard time machine)
   React.useEffect(() => {
@@ -209,6 +211,11 @@ export const TransferView: React.FC<TransferViewProps> = ({
 
     setIsTransferring(true);
     try {
+      const storedKeys = typeof window !== 'undefined' ? localStorage.getItem('tubelistify_api_keys') : null;
+      const parsedKeys = storedKeys ? JSON.parse(storedKeys) : {};
+      const spotifyToken = typeof window !== 'undefined' ? localStorage.getItem('tubelistify_spotify_token') : null;
+      const accessToken = targetPlatform === 'spotify' ? spotifyToken : parsedKeys.googleApiKey;
+
       const res = await fetch('/api/playlist/transfer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -217,6 +224,7 @@ export const TransferView: React.FC<TransferViewProps> = ({
           title: targetTitle || 'TubeListiFy Playlist',
           description: targetDescription || 'Transferred via TubeListiFy',
           items: matchResults,
+          accessToken,
         }),
       });
 
@@ -229,6 +237,7 @@ export const TransferView: React.FC<TransferViewProps> = ({
         id: data.playlistId,
         url: data.playlistUrl,
         count: data.transferredCount,
+        isDemo: Boolean(data.isDemo),
       });
 
       // Fire celebratory confetti!
@@ -370,46 +379,94 @@ export const TransferView: React.FC<TransferViewProps> = ({
 
       {/* Success Celebration Card (if transfer completed) */}
       {completedPlaylist && (
-        <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-emerald-500/40 bg-emerald-950/20 shadow-2xl animate-slide-up">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div
+          className={`glass-panel rounded-3xl p-6 sm:p-8 border shadow-2xl animate-slide-up ${
+            completedPlaylist.isDemo
+              ? 'border-amber-500/40 bg-amber-950/20'
+              : 'border-emerald-500/40 bg-emerald-950/20'
+          }`}
+        >
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="flex items-center space-x-4 text-center sm:text-left">
-              <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center flex-shrink-0">
-                <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+              <div
+                className={`w-14 h-14 rounded-2xl border flex items-center justify-center flex-shrink-0 ${
+                  completedPlaylist.isDemo
+                    ? 'bg-amber-500/20 border-amber-500/40'
+                    : 'bg-emerald-500/20 border-emerald-500/40'
+                }`}
+              >
+                {completedPlaylist.isDemo ? (
+                  <Sparkles className="w-8 h-8 text-amber-400" />
+                ) : (
+                  <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+                )}
               </div>
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400">
-                  Transfer Successful!
+                <span
+                  className={`text-[11px] font-bold uppercase tracking-wider ${
+                    completedPlaylist.isDemo ? 'text-amber-400' : 'text-emerald-400'
+                  }`}
+                >
+                  {completedPlaylist.isDemo ? 'Demo Sandbox Simulation Complete' : 'Transfer Successful!'}
                 </span>
                 <h3 className="text-xl font-black text-white">
-                  {completedPlaylist.count} Tracks Synchronized to {targetPlatform}
+                  {completedPlaylist.count} Tracks Matched & Prepared for {targetPlatform}
                 </h3>
-                <p className="text-xs text-zinc-400 mt-0.5">
-                  Your new playlist is created, populated, and ready for streaming.
+                <p className="text-xs text-zinc-400 mt-1 max-w-xl">
+                  {completedPlaylist.isDemo
+                    ? 'Fuzzy normalization and audio matching completed successfully! In Demo Mode, no external account was modified. Connect your Spotify account to save this playlist directly into your personal Spotify library.'
+                    : 'Your new playlist has been created, populated with canonical tracks, and added to your streaming library.'}
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2.5">
-              <a
-                href={completedPlaylist.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold rounded-xl flex items-center space-x-1.5 shadow-lg shadow-emerald-500/20 transition-all"
-              >
-                <span>Open in {targetPlatform}</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+              {completedPlaylist.isDemo ? (
+                <>
+                  {onNavigateToSettings && (
+                    <button
+                      onClick={onNavigateToSettings}
+                      className="px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-95 text-black text-xs font-bold rounded-xl flex items-center space-x-1.5 shadow-lg shadow-emerald-500/20 transition-all"
+                    >
+                      <Music className="w-3.5 h-3.5" />
+                      <span>Connect Spotify Account</span>
+                    </button>
+                  )}
+                  <button
+                    onClick={() => {
+                      const m3u = exportToM3U(matchResults.map((m) => m.matchedTrack || m.sourceTrack), targetTitle);
+                      downloadFile(m3u, `${targetTitle.replace(/[^\w]/g, '_')}.m3u`, 'audio/x-mpegurl');
+                    }}
+                    className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold rounded-xl border border-white/10 flex items-center space-x-1.5 transition-colors"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Download .M3U File</span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <a
+                    href={completedPlaylist.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold rounded-xl flex items-center space-x-1.5 shadow-lg shadow-emerald-500/20 transition-all"
+                  >
+                    <span>Open in {targetPlatform}</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
 
-              <button
-                onClick={() => {
-                  const m3u = exportToM3U(matchResults.map((m) => m.matchedTrack || m.sourceTrack), targetTitle);
-                  downloadFile(m3u, `${targetTitle.replace(/[^\w]/g, '_')}.m3u`, 'audio/x-mpegurl');
-                }}
-                className="px-3.5 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold rounded-xl border border-white/10 flex items-center space-x-1.5 transition-colors"
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span>M3U File</span>
-              </button>
+                  <button
+                    onClick={() => {
+                      const m3u = exportToM3U(matchResults.map((m) => m.matchedTrack || m.sourceTrack), targetTitle);
+                      downloadFile(m3u, `${targetTitle.replace(/[^\w]/g, '_')}.m3u`, 'audio/x-mpegurl');
+                    }}
+                    className="px-3.5 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold rounded-xl border border-white/10 flex items-center space-x-1.5 transition-colors"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>M3U File</span>
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>

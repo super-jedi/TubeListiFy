@@ -22,6 +22,45 @@ export const AuthSettingsView: React.FC<AuthSettingsViewProps> = ({
   const [spotifyClientSecret, setSpotifyClientSecret] = useState('');
   const [googleApiKey, setGoogleApiKey] = useState('');
   const [savedSuccess, setSavedSuccess] = useState(false);
+  const [spotifyConnectedUser, setSpotifyConnectedUser] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const user = localStorage.getItem('tubelistify_spotify_user');
+      const token = localStorage.getItem('tubelistify_spotify_token');
+      if (token) {
+        setSpotifyConnectedUser(user || 'Connected User');
+      }
+
+      const stored = localStorage.getItem('tubelistify_api_keys');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (parsed.spotifyClientId) setSpotifyClientId(parsed.spotifyClientId);
+          if (parsed.spotifyClientSecret) setSpotifyClientSecret(parsed.spotifyClientSecret);
+          if (parsed.googleApiKey) setGoogleApiKey(parsed.googleApiKey);
+        } catch (e) {}
+      }
+    }
+  }, []);
+
+  const handleSpotifyOAuthLogin = () => {
+    const cid = spotifyClientId.trim();
+    if (!cid) {
+      alert('Please enter your Spotify Client ID below (or configure SPOTIFY_CLIENT_ID in .env.local) to initiate OAuth authorization with Spotify.');
+      return;
+    }
+    window.location.href = `/api/auth/spotify/login?clientId=${encodeURIComponent(cid)}`;
+  };
+
+  const handleDisconnectSpotify = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('tubelistify_spotify_token');
+      localStorage.removeItem('tubelistify_spotify_user');
+    }
+    setSpotifyConnectedUser(null);
+    alert('Disconnected from Spotify.');
+  };
 
   const handleSaveKeys = (e: React.FormEvent) => {
     e.preventDefault();
@@ -109,10 +148,40 @@ export const AuthSettingsView: React.FC<AuthSettingsViewProps> = ({
             Grants permission to read user playlists, search the full Spotify catalog, and batch-create target playlists with chunked rate-limiting backoff.
           </p>
 
+          {spotifyConnectedUser ? (
+            <div className="p-3 bg-emerald-950/40 border border-emerald-500/40 rounded-2xl flex items-center justify-between">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+                  Account Linked
+                </span>
+                <h4 className="text-sm font-bold text-white">{spotifyConnectedUser}</h4>
+                <p className="text-[11px] text-zinc-400">Live playlist creation enabled</p>
+              </div>
+              <button
+                onClick={handleDisconnectSpotify}
+                className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs rounded-xl transition-colors"
+              >
+                Disconnect
+              </button>
+            </div>
+          ) : (
+            <div className="p-3 bg-zinc-950/70 border border-white/5 rounded-2xl space-y-2">
+              <p className="text-xs text-zinc-300">
+                Connect your account to write directly to your personal Spotify library:
+              </p>
+              <button
+                onClick={handleSpotifyOAuthLogin}
+                className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl flex items-center justify-center space-x-1.5 shadow-md shadow-emerald-600/20 transition-all"
+              >
+                <span>Authorize with Spotify (OAuth PKCE)</span>
+              </button>
+            </div>
+          )}
+
           <div className="space-y-3 pt-1">
             <div>
               <label className="text-[11px] font-semibold text-zinc-300 block mb-1">
-                Spotify Client ID (Optional for Live Mode)
+                Spotify Client ID (from Developer Dashboard)
               </label>
               <input
                 type="text"
